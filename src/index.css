@@ -1,0 +1,19 @@
+ /*
+  font family : roboto, sans-serif
+  navbar
+    button: #f36b35 
+    background: #074365
+  main
+    button: #f36b35 
+  footer
+    button: #f36b35 
+    background: #074365
+    background-food: #05324c
+*/
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+}
+
