@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
+  font-family: Roboto, sans-serif;
   display: flex;
   align-items: center;
   width: 100vw;
@@ -10,7 +11,6 @@ const Container = styled.div`
 `;
 const Logo = styled.img`
   width: 11%;
-  height: auto;
   margin-left: 10vw;
 `;
 const Navbar = styled.nav`
@@ -101,7 +101,7 @@ const App = (params: params): JSX.Element => {
       </List>
     </Navbar>
     <Search>
-      <Icon src={params.IconSearch} alt='icon' />
+      <Icon src={params.IconSearch} alt='icono' />
       <Input type="search" placeholder={params.inputPlaceholder} />
     </Search>
   </Container>
