@@ -1,4 +1,4 @@
-import { Header, Slider } from './ArielBarrios'
+import { Banner, Header, Slider } from './ArielBarrios'
 
 function App() {
 
@@ -7,6 +7,7 @@ function App() {
       <Header />
       <main>
         <Slider />
+        <Banner />
       </main>
     </>
   )
