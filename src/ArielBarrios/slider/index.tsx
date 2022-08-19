@@ -5,8 +5,8 @@ const Container = styled.div`
   font-family: Roboto, sans-serif;
   position: relative;
   width: 100vw;
-  height: 604px;
-  overflow: hidden;  
+  height: 42vw;
+  max-height: 620px;
 `;
 const Button = styled.button`
   position: absolute;
@@ -29,8 +29,8 @@ const Arrow = styled.img`
   margin: 24px;
 `;
 const Img = styled.img`
-  width: 100vw;
-  height: 604px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 `;
 const ContainerText = styled.div`
@@ -74,7 +74,62 @@ const SliderButton = styled.button`
   cursor: pointer;
 `;
 
-const defaultProps = {
+interface Data {
+  img: string;
+  title: string;
+  paragraph: string;
+  link: string;
+  href: string;
+}
+
+export interface params {
+  data: Data[];
+};
+
+const App = (params: params): JSX.Element => {
+
+  const [sliderPosition, setSliderPosition] = useState(0);
+  const info = params.data[sliderPosition];
+  
+  const nextImage = () => {
+    sliderPosition > params.data.length-2 ? setSliderPosition(0) : setSliderPosition(position => position + 1);   
+  };
+  const prevImage = () => {
+    sliderPosition < 1 ? setSliderPosition(params.data.length-1) : setSliderPosition(position => position - 1);    
+  };
+  const selectImage = (index: number) => setSliderPosition(index);  
+
+  useEffect(() => {
+    const sliderInterval = setInterval(() => {
+      nextImage();
+    }, 6000);
+  
+    return () => clearInterval(sliderInterval);
+  }, [sliderPosition]);
+
+  return (
+  <Container>
+    <ButtonPrev onClick={prevImage}>
+      <Arrow src='/public/greenpeace/chevron.svg' />
+    </ButtonPrev>
+    <Img src={info?.img} />
+    <ContainerText>
+      <Title>{info?.title}</Title>
+      <Paragraph>{info?.paragraph}</Paragraph>
+      <Link href={info?.href}>{info?.link}</Link>
+    </ContainerText>
+    <ButtonNext onClick={nextImage}>
+      <Arrow src='/public/greenpeace/chevron.svg' />
+    </ButtonNext>
+    <ContainerSliderButton>
+      {
+        params.data.map( (_, index) => <SliderButton key={index} onClick={() => selectImage(index) } />)
+      }
+    </ContainerSliderButton>
+  </Container>
+)};
+
+App.defaultProps = {
   data: [
     {
       img: '/public/greenpeace/slider1.webp',
@@ -99,58 +154,5 @@ const defaultProps = {
     },
   ],
 };
-
-interface Data {
-  img: string
-  title: string
-  paragraph: string
-  link: string
-  href: string
-}
-
-export interface params {
-  data?: Data[];
-};
-
-const App = (params: params): JSX.Element => {
-  params = { ...defaultProps, ...params};
-
-  const [sliderPosition, setSliderPosition] = useState(0);
-
-  const info = params.data?.find((_, index) => index === sliderPosition );
- 
-  if(params.data?.length && sliderPosition >= params.data.length) {
-    setSliderPosition(0);
-  };
-
-  useEffect(() => {
-    const sliderInterval = setInterval(() => {
-      setSliderPosition(position => position + 1);
-    }, 5000);
-  
-    return () => clearInterval(sliderInterval);
-  }, []);
-
-  return (
-  <Container>
-    <ButtonPrev>
-      <Arrow src='/public/greenpeace/chevron.svg' />
-    </ButtonPrev>
-    <Img src={info?.img} />
-    <ContainerText>
-      <Title>{info?.title}</Title>
-      <Paragraph>{info?.paragraph}</Paragraph>
-      <Link href={info?.href}>{info?.link}</Link>
-    </ContainerText>
-    <ButtonNext>
-      <Arrow src='/public/greenpeace/chevron.svg' />
-    </ButtonNext>
-    <ContainerSliderButton>
-      <SliderButton />
-      <SliderButton />
-      <SliderButton />
-    </ContainerSliderButton>
-  </Container>
-)};
 
 export default App;
