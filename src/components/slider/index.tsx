@@ -2,9 +2,76 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   font-family: Roboto, sans-serif;
+  position: relative;
   width: 100vw;
   height: 604px;
+  overflow: hidden;  
+`;
+const Button = styled.button`
+  position: absolute;
+  top: 50%;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  `;
+const ButtonPrev = styled(Button)`
+  transform: translateY(-50%) rotate(180deg);
+  left: -12px;
+  `;
+const ButtonNext = styled(Button)`
+  right: -12px;
+  transform: translateY(-50%);
+  `;
+const Arrow = styled.img`
+  width: 28px;
+  height: 46px;
+  margin: 24px;
+`;
+const Img = styled.img`
+  width: 100vw;
+  height: 604px;
+  object-fit: cover;
+`;
+const ContainerText = styled.div`
+  position: absolute;
+  bottom: 35%;
+  left: 11vW;
+  width: 580px;
+  color: white;
+`;
+const Title = styled.h2`
+  font-size: 48px;
   
+`;
+const Paragraph = styled.p`
+  font-size: 18px;
+`;
+const Link = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 280px;
+  height: 50px;
+  padding: 0 30px;
+  border-radius: 4px;
+  background-color: #f36b35;
+  font-size: 16px;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  `;
+const ContainerSliderButton = styled.div`
+  position: absolute;
+  bottom: 12px;
+  left: 11vW;
+`;
+const SliderButton = styled.button`
+  width: 40px;
+  height: 3px;
+  margin: 0 3px;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
 `;
 
 const defaultProps = {
@@ -52,16 +119,23 @@ const App = (params: params): JSX.Element => {
 
   return (
   <Container>
-    <button>
-      <img src='/public/greenpeace/chevron.svg' />
-    </button>
-    <img src={info?.img} />
-    <h2>{info?.title}</h2>
-    <p>{info?.paragraph}</p>
-    <a href={info?.href}>{info?.link}</a>
-    <button>
-      <img src='/public/greenpeace/chevron.svg' />
-    </button>
+    <ButtonPrev>
+      <Arrow src='/public/greenpeace/chevron.svg' />
+    </ButtonPrev>
+    <Img src={info?.img} />
+    <ContainerText>
+      <Title>{info?.title}</Title>
+      <Paragraph>{info?.paragraph}</Paragraph>
+      <Link href={info?.href}>{info?.link}</Link>
+    </ContainerText>
+    <ButtonNext>
+      <Arrow src='/public/greenpeace/chevron.svg' />
+    </ButtonNext>
+    <ContainerSliderButton>
+      <SliderButton />
+      <SliderButton />
+      <SliderButton />
+    </ContainerSliderButton>
   </Container>
 )};
 
