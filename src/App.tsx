@@ -1,4 +1,4 @@
-import { Banner, Header, Slider } from './ArielBarrios'
+import { Banner, Footer, Header, Slider } from './ArielBarrios'
 
 function App() {
 
@@ -9,6 +9,7 @@ function App() {
         <Slider />
         <Banner />
       </main>
+      <Footer />
     </>
   )
 }
