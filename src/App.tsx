@@ -1,4 +1,4 @@
-import { Header, Slider } from "./components"
+import { Header, Slider } from './ArielBarrios'
 
 function App() {
 
