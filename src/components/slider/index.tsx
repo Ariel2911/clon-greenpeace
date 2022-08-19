@@ -1,3 +1,4 @@
+import { useState,useEffect } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -40,8 +41,7 @@ const ContainerText = styled.div`
   color: white;
 `;
 const Title = styled.h2`
-  font-size: 48px;
-  
+  font-size: 48px;  
 `;
 const Paragraph = styled.p`
   font-size: 18px;
@@ -115,7 +115,21 @@ export interface params {
 const App = (params: params): JSX.Element => {
   params = { ...defaultProps, ...params};
 
-  const info = params.data?.find((_, index) => index === 0 )
+  const [sliderPosition, setSliderPosition] = useState(0);
+
+  const info = params.data?.find((_, index) => index === sliderPosition );
+ 
+  if(params.data?.length && sliderPosition >= params.data.length) {
+    setSliderPosition(0);
+  };
+
+  useEffect(() => {
+    const sliderInterval = setInterval(() => {
+      setSliderPosition(position => position + 1);
+    }, 5000);
+  
+    return () => clearInterval(sliderInterval);
+  }, []);
 
   return (
   <Container>
