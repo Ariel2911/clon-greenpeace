@@ -11,9 +11,11 @@
     background-food: #05324c
 */
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
 
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;  
+}
